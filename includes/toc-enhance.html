@@ -1,0 +1,76 @@
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const toc = document.querySelector("nav#TOC, nav.toc-active");
+  if (!toc) {
+    return;
+  }
+
+  const tocLinks = toc.querySelectorAll("a.nav-link[data-scroll-target]");
+  if (!tocLinks.length) {
+    return;
+  }
+
+  const sections = Array.from(tocLinks)
+    .map((link) => {
+      const target = document.querySelector(link.getAttribute("data-scroll-target"));
+      return target ? { link, target, top: 0 } : null;
+    })
+    .filter(Boolean);
+
+  const updateOffsets = () => {
+    sections.forEach((section) => {
+      section.top = section.target.getBoundingClientRect().top + window.scrollY;
+    });
+  };
+
+  const activateLink = (targetLink) => {
+    tocLinks.forEach((link) => link.classList.remove("active"));
+    if (targetLink) {
+      targetLink.classList.add("active");
+    }
+  };
+
+  const OFFSET = 140;
+  let ticking = false;
+
+  const updateActiveSection = () => {
+    const scrollPosition = window.scrollY + OFFSET;
+    let current = sections[0];
+
+    for (const section of sections) {
+      if (section.top <= scrollPosition) {
+        current = section;
+      } else {
+        break;
+      }
+    }
+
+    activateLink(current ? current.link : null);
+    ticking = false;
+  };
+
+  const onScroll = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateActiveSection);
+      ticking = true;
+    }
+  };
+
+  updateOffsets();
+  updateActiveSection();
+
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", () => {
+    updateOffsets();
+    updateActiveSection();
+  });
+
+  window.addEventListener("hashchange", () => {
+    const hash = window.location.hash;
+    const match = sections.find((section) => section.link.getAttribute("data-scroll-target") === hash);
+    if (match) {
+      activateLink(match.link);
+    }
+  });
+});
+</script>

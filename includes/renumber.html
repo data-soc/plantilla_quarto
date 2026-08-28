@@ -1,0 +1,211 @@
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const parseNumberParts = (value) =>
+    (value || "")
+      .split(".")
+      .map((part) => parseInt(part, 10))
+      .filter((num) => !Number.isNaN(num));
+
+  const formatNumberParts = (parts) => parts.join(".");
+
+  const adjustNumber = (value) => {
+    const trimmed = (value || "").trim();
+    if (!/^\d/.test(trimmed)) {
+      return trimmed;
+    }
+    const parts = parseNumberParts(trimmed);
+    if (!parts.length) {
+      return "";
+    }
+  parts[0] = parts[0] - 1;
+    if (parts[0] <= 0) {
+      return "";
+    }
+    return formatNumberParts(parts);
+  };
+
+  const removeSpacer = (node) => {
+    let sibling = node.nextSibling;
+    while (sibling && sibling.nodeType === Node.TEXT_NODE) {
+      const cleaned = sibling.textContent.replace(/\u00a0/g, "").trim();
+      const next = sibling.nextSibling;
+      if (cleaned.length === 0) {
+        sibling.remove();
+        sibling = next;
+      } else {
+        break;
+      }
+    }
+  };
+
+  const clearNumber = (node) => {
+    if (!node) return;
+    node.textContent = "";
+    node.classList.add("chapter-number--hidden");
+    node.style.display = "none";
+    removeSpacer(node);
+  };
+
+  const ensureChapterSpacing = (node) => {
+    if (!node || !node.classList.contains("chapter-number")) return;
+
+    let numeric = (node.textContent || "").replace(/\.+\s*$/u, "");
+    if (!numeric) return;
+
+    node.textContent = numeric;
+
+    const contextsNeedingSpace = node.closest(".quarto-title-block") ||
+      node.closest("nav.quarto-page-breadcrumbs");
+
+    node.textContent = `${numeric}.`;
+
+    if (contextsNeedingSpace) {
+      const next = node.nextSibling;
+      const hasWhitespaceText =
+        next &&
+        next.nodeType === Node.TEXT_NODE &&
+        /\s/.test(next.textContent || "");
+      if (!hasWhitespaceText) {
+        node.insertAdjacentText("afterend", "\u00a0");
+      }
+    }
+  };
+
+  const applyNumber = (node) => {
+    if (!node) return;
+    const adjusted = adjustNumber(node.textContent);
+    if (!adjusted) {
+      clearNumber(node);
+    } else {
+      node.textContent = adjusted;
+      node.classList.remove("chapter-number--hidden");
+      node.style.display = "inline-block";
+      removeSpacer(node);
+      ensureChapterSpacing(node);
+    }
+  };
+
+  const updateDataNumber = (node) => {
+    const current = node.getAttribute("data-number");
+    if (current === null) return;
+    const adjusted = adjustNumber(current);
+    if (adjusted) {
+      node.setAttribute("data-number", adjusted);
+    } else {
+      node.removeAttribute("data-number");
+    }
+  };
+
+  const isFrontMatterHref = (href) =>
+    /\/?index\.html(?:#|$)/i.test(href || "") ||
+    /\/?00-prefacio\.html(?:#|$)/i.test(href || "");
+
+  document
+    .querySelectorAll(".sidebar .chapter-number")
+    .forEach((node) => {
+      const link = node.closest("a");
+      const href = link ? link.getAttribute("href") : "";
+      if (isFrontMatterHref(href)) {
+        clearNumber(node);
+      } else {
+        applyNumber(node);
+      }
+    });
+
+  const pathname = window.location.pathname || "";
+
+  document
+    .querySelectorAll('.quarto-title-block .chapter-number')
+    .forEach((node) => {
+      if (isFrontMatterHref(pathname)) {
+        clearNumber(node);
+      } else {
+        applyNumber(node);
+      }
+    });
+
+  document
+    .querySelectorAll('nav.quarto-page-breadcrumbs .chapter-number')
+    .forEach((node) => {
+      const link = node.closest('a');
+      const href = link ? link.getAttribute('href') : pathname;
+      if (isFrontMatterHref(href)) {
+        clearNumber(node);
+      } else {
+        applyNumber(node);
+      }
+    });
+
+  document
+    .querySelectorAll("main .header-section-number")
+    .forEach((node) => {
+      if (isFrontMatterHref(pathname)) {
+        const section = node.closest("section");
+        if (section && section.matches(".level1:first-of-type, .level2:first-of-type")) {
+          clearNumber(node);
+          return;
+        }
+      }
+      applyNumber(node);
+    });
+
+  document
+    .querySelectorAll("main [data-number]")
+    .forEach(updateDataNumber);
+
+  document
+    .querySelectorAll("#TOC .header-section-number")
+    .forEach((node) => {
+      const link = node.closest("a");
+      const href = link ? link.getAttribute("href") : "";
+      if (isFrontMatterHref(href)) {
+        clearNumber(node);
+      } else {
+        applyNumber(node);
+      }
+    });
+
+  document
+    .querySelectorAll("#TOC [data-number]")
+    .forEach(updateDataNumber);
+
+  document
+    .querySelectorAll('#TOC a[data-scroll-target][data-number]')
+    .forEach(updateDataNumber);
+
+  const expandMarginToc = () => {
+    const toc = document.getElementById("TOC");
+    if (!toc) return;
+    toc.querySelectorAll("ul.collapse").forEach((node) => {
+      node.classList.remove("collapse");
+      node.classList.add("toc-expanded");
+    });
+    toc.querySelectorAll("[data-bs-toggle='collapse']").forEach((trigger) => {
+      trigger.removeAttribute("data-bs-toggle");
+      trigger.setAttribute("aria-expanded", "true");
+    });
+  };
+
+  expandMarginToc();
+});
+</script>
+<style>
+.sidebar .chapter-number {
+  display: inline-block;
+  min-width: 1ch;
+  margin-right: 0.1ch;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.chapter-number--hidden {
+  visibility: hidden !important;
+  display: none !important;
+}
+.toc-expanded {
+  display: block !important;
+  visibility: visible !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+</style>
+

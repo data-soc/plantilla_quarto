@@ -1,0 +1,137 @@
+﻿---
+title: "Resultados"
+---
+## Analisis descriptivo
+
+Resumen de las estadisticas descriptivas clave y visualizaciones de apoyo.
+```{r grafico-ejemplo}
+#| fig-cap: "Relacion X^2"
+#| warning: false
+if (requireNamespace("ggplot2", quietly = TRUE)) {
+  library(ggplot2)
+  ggplot(mtcars, aes(wt, mpg)) + geom_point()
+}
+```
+
+## Modelos
+
+Presentacion de los resultados de los modelos propuestos, con interpretacion y conclusiones.
+
+```{r ejemplo-modelo-tabla}
+#| echo: false
+#| warning: false
+#| tbl-cap: "Resumen comparativo de modelos"
+#| tbl-label: tbl-modelos
+if (requireNamespace("broom", quietly = TRUE) &&
+    requireNamespace("dplyr", quietly = TRUE) &&
+    requireNamespace("tibble", quietly = TRUE)) {
+  library(broom)
+  library(dplyr)
+  library(tibble)
+
+  modelo <- lm(mpg ~ wt + hp, data = mtcars)
+
+  tabla <- tidy(modelo, conf.int = TRUE) |>
+    mutate(
+      term = recode(
+        term,
+        "(Intercept)" = "Constante",
+        "wt" = "Capital social barrial",
+        "hp" = "Precariedad laboral"
+      ),
+      `Coef.` = sprintf("%0.3f", estimate),
+      `Std. Err.` = sprintf("%0.3f", std.error),
+      `t-valor` = sprintf("%0.2f", statistic),
+      p_valor_num = p.value,
+      `p-valor` = if_else(p.value < 0.001, "<0.001", sprintf("%0.3f", p.value)),
+      `Sig.` = case_when(
+        p.value < 0.001 ~ "***",
+        p.value < 0.01 ~ "**",
+        p.value < 0.05 ~ "*",
+        p.value < 0.1 ~ ".",
+        TRUE ~ ""
+      ),
+      `IC 95 %` = sprintf("[%0.3f, %0.3f]", conf.low, conf.high)
+    ) |>
+    select(Predictor = term, `Coef.`, `Std. Err.`, `t-valor`, `p-valor`, `Sig.`, `IC 95 %`, p_valor_num)
+
+  gof <- glance(modelo)
+  tabla <- bind_rows(
+    tabla,
+    tibble(
+      Predictor = c("N", "R^2", "R^2 ajustado"),
+      `Coef.` = c(sprintf("%0.0f", gof$nobs), sprintf("%0.3f", gof$r.squared), sprintf("%0.3f", gof$adj.r.squared)),
+      `Std. Err.` = "",
+      `t-valor` = "",
+      `p-valor` = "",
+      `Sig.` = "",
+      `IC 95 %` = "",
+      p_valor_num = NA_real_
+    )
+  )
+
+  if (knitr::is_latex_output()) {
+    tabla_latex <- select(tabla, -p_valor_num)
+    knitr::kable(
+      tabla_latex,
+      format = "pipe",
+      escape = FALSE,
+      align = c("l", rep("c", ncol(tabla_latex) - 1))
+    )
+  } else if (requireNamespace("gt", quietly = TRUE)) {
+    tabla_display <- tabla |>
+      mutate(`p-valor` = gsub("<", "&lt;", `p-valor`, fixed = TRUE)) |>
+      select(-p_valor_num)
+
+    gt::gt(tabla_display) |>
+      gt::tab_header(
+        title = gt::md("**Resultados del modelo de regresiÃ³n**"),
+        subtitle = gt::md("Coeficientes estimados para mpg ~ wt + hp")
+      ) |>
+      gt::cols_label(
+        Predictor = "Predictor",
+        `Coef.` = "Coef.",
+        `Std. Err.` = "Std. Err.",
+        `t-valor` = "t-valor",
+        `p-valor` = "p-valor",
+        `Sig.` = "Sig.",
+        `IC 95 %` = "IC 95 %"
+      ) |>
+      gt::cols_align(align = "center", columns = c(`Coef.`, `Std. Err.`, `t-valor`, `p-valor`, `Sig.`, `IC 95 %`)) |>
+      gt::cols_align(align = "left", columns = Predictor) |>
+      gt::tab_options(
+        table.width = gt::pct(85),
+        heading.title.font.size = gt::px(16),
+        heading.subtitle.font.size = gt::px(11),
+        table.border.top.width = gt::px(1.5),
+        table.border.top.color = "#000000",
+        table.border.bottom.width = gt::px(1.5),
+        table.border.bottom.color = "#000000",
+        column_labels.border.top.width = gt::px(1.2),
+        column_labels.border.top.color = "#000000",
+        column_labels.border.bottom.width = gt::px(1.2),
+        column_labels.border.bottom.color = "#000000",
+        data_row.padding = gt::px(4),
+        table.font.size = 13
+      ) |>
+      gt::opt_table_font(
+        font = list(
+          gt::google_font("Source Sans Pro"),
+          gt::default_fonts()
+        )
+      ) |>
+      gt::tab_source_note(gt::md("Notas: *** p < 0.001, ** p < 0.01, * p < 0.05, . p < 0.10"))
+  } else {
+    tabla_ligera <- select(tabla, -p_valor_num)
+    knitr::kable(
+      tabla_ligera,
+      format = "html",
+      escape = FALSE,
+      align = c("l", rep("c", ncol(tabla_ligera) - 1)),
+      table.attr = "class='table table-sm table-striped align-middle w-100'"
+    )
+  }
+}
+```
+
+

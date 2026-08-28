@@ -1,0 +1,183 @@
+<script>
+window.addEventListener('load', function () {
+  const selectors = [
+    '.quarto-sidebar .logo img',
+    '.quarto-sidebar .quarto-logo img',
+    '.sidebar-logo img',
+    '.site-logo img',
+    'a.quarto-site-logo img'
+  ];
+
+  let logoImg = null;
+  for (const selector of selectors) {
+    logoImg = document.querySelector(selector);
+    if (logoImg) break;
+  }
+
+  if (logoImg) {
+    const link = document.createElement('a');
+    link.href = 'index.html';
+    logoImg.parentNode.insertBefore(link, logoImg);
+    link.appendChild(logoImg);
+  }
+
+  const decodeMeta = (value) => {
+    if (!value) return '';
+    const trimmed = value.trim();
+    if (!trimmed || trimmed.startsWith('{{')) return '';
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = trimmed;
+    return textarea.value.trim();
+  };
+
+  const metaRepoUrl = decodeMeta('{{< meta book.repo-url >}}');
+  const metaRepoUrlNormalized = metaRepoUrl ? metaRepoUrl.replace(/\/+$/g, '') : '';
+
+  const computeArchiveUrl = (hrefHint) => {
+    const baseHref = (hrefHint || metaRepoUrlNormalized || metaRepoUrl || '').trim();
+    if (!baseHref) return '';
+
+    try {
+      const url = new URL(baseHref, window.location.href);
+      const pathnameRaw = url.pathname.replace(/\/+$/g, '');
+      const normalizeBranch = (value) => {
+        const branch = (value || '').trim();
+        return branch ? branch : 'main';
+      };
+
+      if (url.hostname.includes('github.')) {
+        const match = pathnameRaw.match(/^\/([^/]+)\/([^/]+)(?:\/(tree|blob)\/([^/]+).*)?$/);
+        if (!match) return '';
+
+        const owner = match[1];
+        const repo = match[2].replace(/\.git$/i, '');
+        const branchFromPath = match[4];
+        const branch = normalizeBranch(branchFromPath || url.searchParams.get('branch'));
+
+        return `${url.origin}/${owner}/${repo}/archive/refs/heads/${branch}.zip`;
+      }
+
+      if (url.hostname.includes('gitlab.')) {
+        const match = pathnameRaw.match(/^\/(.+?)(?:\/-\/tree\/([^/]+).*)?$/);
+        if (!match) return '';
+
+        const projectPath = match[1].replace(/\/+$/g, '');
+        const repoName = projectPath.split('/').pop();
+        const branchFromPath = match[2];
+        const branch = normalizeBranch(branchFromPath || url.searchParams.get('ref')); // GitLab often uses ref param
+
+        return `${url.origin}/${projectPath}/-/archive/${branch}/${repoName}-${branch}.zip`;
+      }
+
+      if (url.hostname.includes('bitbucket.')) {
+        const match = pathnameRaw.match(/^\/([^/]+)\/([^/]+)(?:\/src\/([^/]+).*)?$/);
+        if (!match) return '';
+
+        const owner = match[1];
+        const repo = match[2].replace(/\.git$/i, '');
+        const branchFromPath = match[3];
+        const branch = normalizeBranch(branchFromPath || url.searchParams.get('at'));
+
+        return `${url.origin}/${owner}/${repo}/get/${branch}.zip`;
+      }
+
+      const branch = normalizeBranch(url.searchParams.get('branch'));
+      return `${baseHref.replace(/\/+$/g, '')}/archive/refs/heads/${branch}.zip`;
+    } catch (error) {
+      return '';
+    }
+  };
+
+  const ensureDownloadButton = (fromObserver = false) => {
+    const tools = document.querySelector('.sidebar-title .sidebar-tools-main');
+    if (!tools) {
+      if (!fromObserver) {
+        window.setTimeout(() => ensureDownloadButton(false), 100);
+      }
+      return;
+    }
+
+    let download = tools.querySelector('[data-template-download]');
+    if (!download) {
+      download = document.createElement('a');
+      download.className = 'quarto-navigation-tool px-1';
+      download.title = 'Descargar ZIP';
+      download.setAttribute('aria-label', 'Descargar plantilla (ZIP)');
+      download.setAttribute('data-template-download', 'true');
+      download.target = '_blank';
+      download.rel = 'noopener';
+      download.innerHTML = '<i class="bi bi-download"></i>';
+    }
+
+    const links = Array.from(tools.querySelectorAll('a.quarto-navigation-tool'));
+    let repoLink = null;
+
+    if (metaRepoUrlNormalized) {
+      repoLink = links.find((anchor) => {
+        if (anchor === download) return false;
+        const href = anchor.href ? anchor.href.replace(/\/+$/g, '') : '';
+        return href === metaRepoUrlNormalized;
+      });
+    }
+
+    if (!repoLink) {
+      repoLink = links.find((anchor) => anchor !== download && anchor.querySelector('.bi-github'));
+    }
+
+    if (!repoLink) {
+      repoLink = links.find((anchor) => {
+        if (anchor === download) return false;
+        const href = anchor.href || '';
+        return /github\.|gitlab\.|bitbucket\./i.test(href);
+      });
+    }
+
+    const archiveUrl = computeArchiveUrl(repoLink ? repoLink.href : undefined);
+
+    if (!archiveUrl) {
+      if (download.parentNode) {
+        download.parentNode.removeChild(download);
+      }
+      return;
+    }
+
+    download.href = archiveUrl;
+    download.title = 'Descargar plantilla (ZIP)';
+    download.setAttribute('aria-label', 'Descargar plantilla (ZIP)');
+    const codeToggle = links.find((anchor) => anchor.classList.contains('global-code-toggle'));
+
+    if (repoLink) {
+      repoLink.insertAdjacentElement('afterend', download);
+    } else if (codeToggle) {
+      codeToggle.insertAdjacentElement('beforebegin', download);
+    } else {
+      tools.insertBefore(download, tools.firstChild);
+    }
+  };
+
+  ensureDownloadButton();
+
+  const observer = new MutationObserver((mutations) => {
+    const shouldUpdate = mutations.some((mutation) => {
+      if (mutation.type !== 'childList') {
+        return false;
+      }
+      return Array.from(mutation.addedNodes).some((node) => {
+        if (!(node instanceof HTMLElement)) {
+          return false;
+        }
+        return (
+          node.classList.contains('global-code-toggle') ||
+          (node.querySelector && node.querySelector('.global-code-toggle'))
+        );
+      });
+    });
+
+    if (shouldUpdate) {
+      ensureDownloadButton(true);
+    }
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+});
+</script>

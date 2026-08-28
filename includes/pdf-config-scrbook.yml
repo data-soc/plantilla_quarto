@@ -1,0 +1,23 @@
+pdf:
+  toc: true
+  lof: true
+  lot: true
+  documentclass: scrbook
+  classoption:
+  - oneside
+  papersize: a4
+  geometry:
+  - top=25mm
+  - bottom=25mm
+  - left=30mm
+  - right=20mm
+  mainfont: TeX Gyre Pagella
+  sansfont: TeX Gyre Heros
+  monofont: TeX Gyre Cursor
+  colorlinks: true
+  number-sections: true
+  include-in-header: includes/preamble.tex
+  include-before-body: includes/title-pdf.tex
+  include-after-body: includes/backmatter.tex
+  fig-cap-location: top
+  tbl-cap-location: top

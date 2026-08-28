@@ -1,0 +1,6 @@
+﻿---
+title: "Introducción"
+numbered: true
+---
+
+Motivación, preguntas de investigación, Objetivo general y específicos, contribución esperada, estructura del documento.

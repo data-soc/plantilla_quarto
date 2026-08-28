@@ -1,0 +1,29 @@
+---
+title: "Antecedentes conceptuales y empíricos"
+---
+
+Sintetiza la literatura relevante. Usa referencias como @desmond2019poverty.
+
+## Marco conceptual
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec.
+
+### Ejemplos APA 7
+
+Según @desmond2019poverty, los patrones de segregación residencial configuran los límites de oportunidad urbana y permiten introducir la sintaxis de cita narrativa dentro del flujo del texto.
+
+Los matices culturales del gusto pueden reforzar desigualdades cuando se institucionalizan en jerarquías de prestigio académico [@bourdieu2012, p. 35], lo que ilustra la cita parentética con número de página.
+
+Para contrastar hallazgos se pueden reunir múltiples referencias en un mismo paréntesis analítico [@desmond2019poverty; @xie2017bookdown], destacando cómo distintos diseños metodológicos convergen en un mecanismo causal compartido.
+
+> Las aspiraciones colectivas se negocian constantemente en espacios cotidianos que traducen capital cultural en prácticas concretas, reescribiendo así el mapa de posibilidades percibidas por cada agente social en contextos urbanos desiguales. Este entramado simbólico orienta aspiraciones futuras y limita adaptaciones comunitarias. [@bourdieu2012, p. 87]
+
+
+
+## Resumen del capítulo
+
+> Este capítulo ofreció una revisión breve de los conceptos fundamentales y estableció proposiciones para guiar el análisis empírico posterior.

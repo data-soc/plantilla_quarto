@@ -1,0 +1,515 @@
+
+/* =========================================================
+   Reportes FACSO - estilos base 
+   ========================================================= */
+
+:root {
+  --ink: #111827;
+  --ink-soft: #475569;
+  --paper: #ffffff;
+  --line: #e5e7eb;
+  --facso: #002f6c;
+  --facso-2: #84a7d8;
+  --accent: #d91a2a;
+
+  /* Valores bootstrap para heredar tema */
+  --bs-body-bg: var(--paper);
+  --bs-body-color: var(--ink);
+}
+
+html,
+body {
+  min-height: 100vh;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: "TeX Gyre Termes", "Noto Serif", Georgia, serif;
+  line-height: 1.5;
+  font-size: 12pt;
+}
+
+img,
+svg,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Source Sans Pro", system-ui, -apple-system, "Segoe UI", Arial,
+    sans-serif;
+  letter-spacing: 0.2px;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: clamp(1.7rem, 2.7vw, 2.1rem);
+  margin: 2rem 0 0.9rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: clamp(1.4rem, 2vw, 1.6rem);
+  margin: 1.6rem 0 0.75rem;
+  font-weight: 650;
+}
+
+h3 {
+  font-size: clamp(1.15rem, 1.6vw, 1.3rem);
+  margin: 1.2rem 0 0.55rem;
+  font-weight: 600;
+}
+
+.quarto-title-block .title {
+  font-size: clamp(2rem, 3.4vw, 2.4rem);
+  font-weight: 800;
+  margin-bottom: 0.3rem;
+}
+
+.quarto-title-block .subtitle {
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  margin-top: 0.08rem;
+}
+
+.quarto-title-block .chapter-number {
+  display: inline-block;
+  margin-right: 0;
+}
+
+nav.quarto-page-breadcrumbs .chapter-number {
+  display: inline-block;
+  margin-right: 0;
+}
+
+.keywords-line {
+  display: inline-block;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  margin-bottom: 1rem;
+}
+
+.keywords-line strong {
+  color: var(--ink);
+}
+
+.content p,
+.page-columns p,
+#quarto-document-content p,
+.quarto-article p,
+p {
+  margin: 0.9rem 0;
+  text-align: justify !important;
+  text-justify: inter-word;
+}
+
+li {
+  margin: 0.2rem 0;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: var(--line);
+  margin: 2rem 0;
+}
+
+a {
+  color: #0f6cbd;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: #084b8a;
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: 2px dashed var(--facso-2);
+  outline-offset: 2px;
+}
+
+blockquote {
+  border-left: 4px solid var(--facso);
+  padding: 0.6rem 1rem;
+  color: #374151;
+  background: #f9fafb;
+}
+
+.callout {
+  border: 1px solid var(--line);
+  border-left-width: 5px;
+  border-radius: 12px;
+}
+
+.callout-note {
+  border-left-color: #0f6cbd;
+}
+
+.callout-important {
+  border-left-color: var(--accent);
+}
+
+.callout-warning {
+  border-left-color: #d97706;
+}
+
+.callout-tip {
+  border-left-color: #16a34a;
+}
+
+.table {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table th,
+.table td {
+  border-color: var(--line);
+  vertical-align: top;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background: #fafafa;
+}
+
+.figure {
+  margin: 1.2rem 0;
+}
+
+.figure .figure-caption,
+.table-caption {
+  font-weight: 600;
+  color: var(--ink);
+  margin-top: 0.4rem;
+}
+
+pre,
+code,
+kbd,
+samp {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+pre {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #f8fafc;
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+}
+
+code {
+  background: #f3f4f6;
+  border-radius: 6px;
+  padding: 0.1rem 0.35rem;
+}
+
+.footnotes {
+  border-top: 1px solid var(--line);
+  margin-top: 2rem;
+  padding-top: 1rem;
+}
+
+.footnote-ref {
+  text-decoration: none;
+}
+
+@media print {
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+}
+
+.sidebar .sidebar-title .sidebar-logo img {
+  max-width: 150px;
+  height: auto;
+  display: block;
+  margin: 0.5rem auto 1rem;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  margin: 2.5rem 0 1.5rem;
+}
+
+.logo img {
+  width: min(42vw, 440px);
+  height: auto;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.sidebar .sidebar-menu-container .sidebar-item {
+  margin: 0.35rem 0;
+}
+
+.sidebar .sidebar-menu-container .sidebar-item-text {
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+}
+
+.sidebar .sidebar-menu-container .chapter-number {
+  display: inline-block;
+  margin-right: 0.35rem;
+  color: var(--ink);
+  font-size: inherit;
+}
+
+.sidebar .sidebar-menu-container a[href$="index.html"] .chapter-number,
+.sidebar .sidebar-menu-container a[href^="./index.html"] .chapter-number,
+.sidebar .sidebar-menu-container a[href^="index.html#"] .chapter-number,
+.quarto-sidebar .sidebar-menu-container a[href$="index.html"] .chapter-number,
+.quarto-sidebar .sidebar-menu-container a[href^="./index.html"] .chapter-number,
+.quarto-sidebar .sidebar-menu-container a[href^="index.html#"] .chapter-number,
+nav.quarto-page-breadcrumbs .breadcrumb-item a[href*="index.html"] .chapter-number {
+  display: none !important;
+}
+
+footer.footer {
+  display: none !important;
+}
+footer.footer {
+  display: none !important;
+}
+
+.toc-actions {
+  display: none !important;
+}
+
+nav.page-navigation {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.45rem 1.5rem;
+  background: var(--paper);
+  border-top: 1px solid rgba(17, 24, 39, 0.08);
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  gap: 1rem;
+}
+
+nav.page-navigation .nav-page {
+  flex: 1 1 0;
+}
+
+nav.page-navigation .nav-page.nav-page-previous {
+  text-align: left;
+}
+
+nav.page-navigation .nav-page.nav-page-next {
+  text-align: right;
+}
+
+nav.page-navigation .nav-page a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 500;
+}
+
+nav.page-navigation .nav-page a:hover {
+  color: var(--ink);
+}
+
+.sidebar .sidebar-menu-container .sidebar-section {
+  margin-left: 0;
+  border-left: none;
+  padding-left: 0;
+}
+
+.sidebar .sidebar-menu-container ul {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.sidebar .sidebar-menu-container .sidebar-item {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.sidebar .sidebar-menu-container .sidebar-item-container {
+  padding-left: 0;
+}
+
+.sidebar .sidebar-menu-container .sidebar-item-text {
+  display: flex;
+  align-items: center;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+// Organiza numero-capitulo + titulo con espacio mas evidente
+.sidebar .sidebar-menu-container .menu-text {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.sidebar .sidebar-menu-container .menu-text .chapter-number {
+  display: inline-flex;
+  justify-content: flex-end;
+  min-width: 2ch;
+  margin-right: 0.55rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.sidebar .sidebar-menu-container .menu-text .chapter-title {
+  margin: 0;
+}
+
+.sidebar .sidebar-menu-container .sidebar-item-toggle {
+  font-size: .85rem;
+  margin-left: 0;
+  color: var(--ink-soft);
+}
+
+nav.toc-active,
+.quarto-margin-sidebar nav#TOC {
+  background: linear-gradient(180deg, rgba(132, 167, 216, 0.12), rgba(132, 167, 216, 0.05) 55%, transparent);
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  border-radius: 0.85rem;
+  padding: 1.3rem 1.15rem 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 12px 30px -15px rgba(15, 31, 53, 0.3);
+  font-family: "Source Sans Pro", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+
+nav.toc-active #toc-title,
+.quarto-margin-sidebar nav#TOC #toc-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(17, 24, 39, 0.08);
+  padding-bottom: 0.45rem;
+}
+
+nav.toc-active ul,
+.quarto-margin-sidebar nav#TOC ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+nav.toc-active ul li,
+.quarto-margin-sidebar nav#TOC ul li {
+  margin: 0;
+}
+
+nav.toc-active .nav-link,
+.quarto-margin-sidebar nav#TOC .nav-link {
+  font-size: 0.93rem;
+  color: var(--ink-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 0.5rem;
+  position: relative;
+  transition: all 0.18s ease-in-out;
+}
+
+nav.toc-active .nav-link span.header-section-number,
+.quarto-margin-sidebar nav#TOC .nav-link span.header-section-number {
+  font-weight: 600;
+  color: rgba(0, 47, 108, 0.7);
+  min-width: 2.4rem;
+}
+
+nav.toc-active .nav-link:before,
+.quarto-margin-sidebar nav#TOC .nav-link:before {
+  content: "";
+  position: absolute;
+  left: 0.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: transparent;
+  transition: background 0.18s ease-in-out;
+}
+
+nav.toc-active .nav-link:hover,
+nav.toc-active .nav-link:focus,
+.quarto-margin-sidebar nav#TOC .nav-link:hover,
+.quarto-margin-sidebar nav#TOC .nav-link:focus {
+  color: var(--facso);
+  background: rgba(132, 167, 216, 0.2);
+  text-decoration: none;
+}
+
+nav.toc-active .nav-link.active,
+.quarto-margin-sidebar nav#TOC .nav-link.active {
+  color: var(--facso);
+  font-weight: 600;
+  background: rgba(132, 167, 216, 0.28);
+  box-shadow: inset 2px 0 0 var(--facso);
+}
+
+nav.toc-active .nav-link.active:before,
+.quarto-margin-sidebar nav#TOC .nav-link.active:before {
+  background: var(--facso);
+}
+
+nav.toc-active .nav-link:hover span.header-section-number,
+nav.toc-active .nav-link.active span.header-section-number,
+.quarto-margin-sidebar nav#TOC .nav-link:hover span.header-section-number,
+.quarto-margin-sidebar nav#TOC .nav-link.active span.header-section-number {
+  color: var(--facso);
+}
+
+@import "custom";
+
+
+.markdown-table {
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+}
+
+table[data-quarto-disable-processing="true"] {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+}
+
+
+.table.table-borderless {
+  width: 100% !important;
+}
+
+
+.cell-output-display {
+  padding-left: 0;
+  padding-right: 0;
+}
+

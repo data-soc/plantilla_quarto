@@ -1,0 +1,164 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Reportes FACSO - Plantilla Quarto",
+    "section": "",
+    "text": "Palabras clave: sociología, educación, Chile\n\nAbstract\nResumen en español (200-300). Expón propósito, método, resultados clave y conclusiones. Puede incluir citas como Xie (2017) y se actualizarán automáticamente.\n\n\n\n\n\n\nXie, Y. (2017). bookdown: Authoring Books and Technical Documents with R Markdown. Chapman; Hall/CRC.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Abstract</span>"
+    ]
+  },
+  {
+    "objectID": "00-prefacio.html",
+    "href": "00-prefacio.html",
+    "title": "Prefacio",
+    "section": "",
+    "text": "Agradecimientos opcionales, dedicatorias, notas sobre financiamiento, etc.",
+    "crumbs": [
+      "Prefacio"
+    ]
+  },
+  {
+    "objectID": "01-introduccion.html",
+    "href": "01-introduccion.html",
+    "title": "2  Introducción",
+    "section": "",
+    "text": "Motivación, preguntas de investigación, Objetivo general y específicos, contribución esperada, estructura del documento.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introducción</span>"
+    ]
+  },
+  {
+    "objectID": "02-marco-teorico.html",
+    "href": "02-marco-teorico.html",
+    "title": "3  Antecedentes conceptuales y empíricos",
+    "section": "",
+    "text": "3.1 Marco conceptual\nSintetiza la literatura relevante. Usa referencias como Desmond & Wilmers (2019).\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec.\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at nulla a ligula volutpat dictum. Sed dictum hendrerit augue, vitae efficitur nisl hendrerit nec.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Antecedentes conceptuales y empíricos</span>"
+    ]
+  },
+  {
+    "objectID": "02-marco-teorico.html#marco-conceptual",
+    "href": "02-marco-teorico.html#marco-conceptual",
+    "title": "3  Antecedentes conceptuales y empíricos",
+    "section": "",
+    "text": "3.1.1 Ejemplos APA 7\nSegún Desmond & Wilmers (2019), los patrones de segregación residencial configuran los límites de oportunidad urbana y permiten introducir la sintaxis de cita narrativa dentro del flujo del texto.\nLos matices culturales del gusto pueden reforzar desigualdades cuando se institucionalizan en jerarquías de prestigio académico (Bourdieu, 2012, p. 35), lo que ilustra la cita parentética con número de página.\nPara contrastar hallazgos se pueden reunir múltiples referencias en un mismo paréntesis analítico (Desmond & Wilmers, 2019; Xie, 2017), destacando cómo distintos diseños metodológicos convergen en un mecanismo causal compartido.\n\nLas aspiraciones colectivas se negocian constantemente en espacios cotidianos que traducen capital cultural en prácticas concretas, reescribiendo así el mapa de posibilidades percibidas por cada agente social en contextos urbanos desiguales. Este entramado simbólico orienta aspiraciones futuras y limita adaptaciones comunitarias. (Bourdieu, 2012, p. 87)",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Antecedentes conceptuales y empíricos</span>"
+    ]
+  },
+  {
+    "objectID": "02-marco-teorico.html#resumen-del-capítulo",
+    "href": "02-marco-teorico.html#resumen-del-capítulo",
+    "title": "3  Antecedentes conceptuales y empíricos",
+    "section": "3.2 Resumen del capítulo",
+    "text": "3.2 Resumen del capítulo\n\nEste capítulo ofreció una revisión breve de los conceptos fundamentales y estableció proposiciones para guiar el análisis empírico posterior.\n\n\n\n\n\n\n\nBourdieu, P. (2012). La distinción: Criterio y bases sociales del gusto. Taurus.\n\n\nDesmond, M., & Wilmers, N. (2019). The Racialized Geography of Housing. American Journal of Sociology.\n\n\nXie, Y. (2017). bookdown: Authoring Books and Technical Documents with R Markdown. Chapman; Hall/CRC.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Antecedentes conceptuales y empíricos</span>"
+    ]
+  },
+  {
+    "objectID": "03-metodologia.html",
+    "href": "03-metodologia.html",
+    "title": "4  Metodología",
+    "section": "",
+    "text": "4.1 Datos\nTexto de muestra para describir las fuentes de datos utilizadas.\n# Carga paquetes de ejemplo\nlibrary(tidyverse)\nmpg             cyl             disp             hp       \n Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  \n 1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  \n Median :19.20   Median :6.000   Median :196.3   Median :123.0  \n Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  \n 3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  \n Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  \n      drat             wt             qsec             vs        \n Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  \n 1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  \n Median :3.695   Median :3.325   Median :17.71   Median :0.0000  \n Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  \n 3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  \n Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  \n       am              gear            carb      \n Min.   :0.0000   Min.   :3.000   Min.   :1.000  \n 1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  \n Median :0.0000   Median :4.000   Median :2.000  \n Mean   :0.4062   Mean   :3.688   Mean   :2.812  \n 3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  \n Max.   :1.0000   Max.   :5.000   Max.   :8.000",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Metodología</span>"
+    ]
+  },
+  {
+    "objectID": "03-metodologia.html#variables",
+    "href": "03-metodologia.html#variables",
+    "title": "4  Metodología",
+    "section": "4.2 Variables",
+    "text": "4.2 Variables\nDetalle de las variables incluidas en el análisis, así como escalas de medición.\n\n\n\n\n\n\nEstadísticas descriptivas por variable (ejemplo)\n\n\nEstadísticas descriptivas de ejemplo\n\n\nVariables seleccionadas del conjunto mtcars\n\n\nStatistic\nN\nMean\nSt. Dev.\nMin\nMax\n\n\n\n\nIngreso per cápita (mensual)\n32\n20.091\n6.027\n10.400\n33.900\n\n\nCapital social barrial\n32\n3.217\n0.978\n1.513\n5.424\n\n\nPrecariedad laboral\n32\n146.688\n68.563\n52.000\n335.000\n\n\nCapital institucional\n32\n3.597\n0.535\n2.760\n4.930\n\n\nParticipación comunitaria\n32\n17.849\n1.787\n14.500\n22.900\n\n\n\nNotas: resumen ilustrativo basado en datos mtcars.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Metodología</span>"
+    ]
+  },
+  {
+    "objectID": "03-metodologia.html#métodos",
+    "href": "03-metodologia.html#métodos",
+    "title": "4  Metodología",
+    "section": "4.3 Métodos",
+    "text": "4.3 Métodos\nBreve descripción de los procedimientos aplicados para procesar y analizar la información.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Metodología</span>"
+    ]
+  },
+  {
+    "objectID": "04-resultados.html",
+    "href": "04-resultados.html",
+    "title": "5  Resultados",
+    "section": "",
+    "text": "5.1 Analisis descriptivo\nResumen de las estadisticas descriptivas clave y visualizaciones de apoyo.\nif (requireNamespace(\"ggplot2\", quietly = TRUE)) {\n  library(ggplot2)\n  ggplot(mtcars, aes(wt, mpg)) + geom_point()\n}\n\n\n\n\nRelacion X^2",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Resultados</span>"
+    ]
+  },
+  {
+    "objectID": "04-resultados.html#modelos",
+    "href": "04-resultados.html#modelos",
+    "title": "5  Resultados",
+    "section": "5.2 Modelos",
+    "text": "5.2 Modelos\nPresentacion de los resultados de los modelos propuestos, con interpretacion y conclusiones.\n\n\n\n\n\n\nResumen comparativo de modelos\n\n\nResultados del modelo de regresiÃ³n\n\n\nCoeficientes estimados para mpg ~ wt + hp\n\n\nPredictor\nCoef.\nStd. Err.\nt-valor\np-valor\nSig.\nIC 95 %\n\n\n\n\nConstante\n37.227\n1.599\n23.28\n&lt;0.001\n***\n[33.957, 40.497]\n\n\nCapital social barrial\n-3.878\n0.633\n-6.13\n&lt;0.001\n***\n[-5.172, -2.584]\n\n\nPrecariedad laboral\n-0.032\n0.009\n-3.52\n0.001\n**\n[-0.050, -0.013]\n\n\nN\n32\n\n\n\n\n\n\n\nR^2\n0.827\n\n\n\n\n\n\n\nR^2 ajustado\n0.815\n\n\n\n\n\n\n\n\nNotas: *** p &lt; 0.001, ** p &lt; 0.01, * p &lt; 0.05, . p &lt; 0.10",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Resultados</span>"
+    ]
+  },
+  {
+    "objectID": "05-discusion.html",
+    "href": "05-discusion.html",
+    "title": "6  Discusión",
+    "section": "",
+    "text": "Interpreta resultados, limitaciones y aportes.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Discusión</span>"
+    ]
+  },
+  {
+    "objectID": "06-conclusiones.html",
+    "href": "06-conclusiones.html",
+    "title": "7  Conclusiones",
+    "section": "",
+    "text": "Síntesis y proyecciones futuras.",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Conclusiones</span>"
+    ]
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "Referencias",
+    "section": "",
+    "text": "Bourdieu, P. (2012). La distinción: Criterio y bases\nsociales del gusto. Taurus.\n\n\nDesmond, M., & Wilmers, N. (2019). The racialized geography of\nhousing. American Journal of Sociology.\n\n\nXie, Y. (2017). Bookdown: Authoring books and technical documents\nwith r markdown. Chapman; Hall/CRC.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Referencias</span>"
+    ]
+  },
+  {
+    "objectID": "apendices/A-encuestas.html",
+    "href": "apendices/A-encuestas.html",
+    "title": "Anexo A - Instrumentos de levantamiento",
+    "section": "",
+    "text": "Incluye cuestionarios, guias de entrevista, etc.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Instrumentos de levantamiento</span>"
+    ]
+  },
+  {
+    "objectID": "apendices/B-tablas.html",
+    "href": "apendices/B-tablas.html",
+    "title": "Anexo B - Tablas adicionales",
+    "section": "",
+    "text": "Tablas extendidas, tests de robustez, etc.",
+    "crumbs": [
+      "Apéndices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Tablas adicionales</span>"
+    ]
+  }
+]

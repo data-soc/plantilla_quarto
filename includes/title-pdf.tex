@@ -1,0 +1,91 @@
+% --- title-pdf.tex personalizado para portada formal ---
+\makeatletter
+\providecommand{\subtitle}[1]{\gdef\@subtitle{#1}}
+\providecommand{\@subtitle}{}
+\providecommand{\frontmattercontext}{}
+\providecommand{\advisorname}{}
+\providecommand{\advisorlabel}{Profesor guia:}
+\providecommand{\frontmatterlocation}{}
+\InputIfFileExists{includes/cover-config.tex}{}{}
+
+\newcommand{\PrintTitle}{%
+  {\sffamily\bfseries\fontsize{24pt}{28pt}\selectfont \@title\par}%
+}
+\newcommand{\PrintSubtitle}{%
+  \begingroup
+  \edef\temp{\detokenize{\@subtitle}}%
+  \ifx\temp\empty\relax
+    % sin subtitulo
+  \else
+    {\sffamily\bfseries\large \@subtitle\par}%
+  \fi
+  \endgroup
+}
+\newcommand{\PrintAuthor}{%
+  {\Large\bfseries \@author\par}%
+}
+\newcommand{\PrintDate}{%
+  {\small \@date\par}%
+}
+\makeatother
+
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{center}
+\vspace*{10mm}
+
+% Logo o imagen institucional
+\includegraphics[width=0.35\textwidth]{assets/cover.png}\par
+\vspace{12mm}
+
+% Titulo y subtitulo
+\PrintTitle
+\vspace{6mm}
+\PrintSubtitle
+
+\vspace{22mm}
+\begingroup
+\edef\temp{\detokenize{\frontmattercontext}}%
+\ifx\temp\empty\relax
+  % sin contexto adicional
+\else
+  {\normalsize \frontmattercontext\par}
+\fi
+\endgroup
+
+\vspace{18mm}
+\PrintAuthor
+
+\vspace{16mm}
+\begingroup
+\edef\temp{\detokenize{\advisorname}}%
+\ifx\temp\empty\relax
+  % sin tutor
+\else
+  \rule{0.45\textwidth}{0.4pt}\par
+  {\small \advisorlabel\ \advisorname\par}
+\fi
+\endgroup
+
+\vfill
+\begingroup
+\edef\temp{\detokenize{\frontmatterlocation}}%
+\ifx\temp\empty\relax
+  % sin ubicacion
+\else
+  {\small \frontmatterlocation\par}
+\fi
+\endgroup
+\PrintDate
+
+\end{center}
+\end{titlepage}
+
+% Preliminares (numeros romanos) y estilo simple
+\frontmatter
+\pagestyle{scrheadings}
+
+\setcounter{tocdepth}{2} % (o 1/3 segun prefieras)
+\tableofcontents
+\listoffigures
+\listoftables

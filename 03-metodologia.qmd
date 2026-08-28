@@ -1,0 +1,125 @@
+﻿---
+title: "Metodología"
+---
+
+## Datos
+
+Texto de muestra para describir las fuentes de datos utilizadas.
+```{r cargar-paquetes}
+#| message: false
+#| warning: false
+#| echo: true
+
+# Carga paquetes de ejemplo
+library(tidyverse)
+```
+
+```{r resumen-datos}
+#| echo: false
+
+# Resumen estadístico
+summary(mtcars)
+```
+
+
+
+## Variables
+
+Detalle de las variables incluidas en el análisis, así como escalas de medición.
+
+
+```{r tabla-estadisticas-variables}
+#| echo: false
+#| warning: false
+#| tbl-cap: "Estadísticas descriptivas por variable (ejemplo)"
+#| tbl-label: tbl-estadisticas-variables
+if (requireNamespace("dplyr", quietly = TRUE) &&
+    requireNamespace("tidyr", quietly = TRUE)) {
+  tabla_stats <- dplyr::select(mtcars, mpg, wt, hp, drat, qsec) |>
+    dplyr::summarise(
+      dplyr::across(
+        .cols = dplyr::everything(),
+        .fns = list(
+          N = ~sum(!is.na(.)),
+          Media = ~mean(., na.rm = TRUE),
+          `Desv. Est.` = ~sd(., na.rm = TRUE),
+          Min = ~min(., na.rm = TRUE),
+          Max = ~max(., na.rm = TRUE)
+        )
+      )
+    ) |>
+    tidyr::pivot_longer(
+      cols = dplyr::everything(),
+      names_to = c("Variable", ".value"),
+      names_sep = "_"
+    ) |>
+    dplyr::mutate(
+      Variable = dplyr::recode(
+        Variable,
+        mpg = "Ingreso per cápita (mensual)",
+        wt = "Capital social barrial",
+        hp = "Precariedad laboral",
+        drat = "Capital institucional",
+        qsec = "Participación comunitaria"
+      ),
+      Media = sprintf("%0.3f", Media),
+      `Desv. Est.` = sprintf("%0.3f", `Desv. Est.`),
+      Min = sprintf("%0.3f", Min),
+      Max = sprintf("%0.3f", Max)
+    )
+
+  if (!knitr::is_latex_output() && requireNamespace("gt", quietly = TRUE)) {
+    gt::gt(tabla_stats) |>
+      gt::tab_header(
+        title = gt::md("**Estadísticas descriptivas de ejemplo**"),
+        subtitle = gt::md("Variables seleccionadas del conjunto `mtcars`")
+      ) |>
+      gt::cols_label(
+        Variable = "Statistic",
+        N = "N",
+        Media = "Mean",
+        `Desv. Est.` = "St. Dev.",
+        Min = "Min",
+        Max = "Max"
+      ) |>
+      gt::tab_options(
+        table.width = gt::pct(85),
+        heading.title.font.size = gt::px(16),
+        heading.subtitle.font.size = gt::px(11),
+        table.border.top.width = gt::px(1.5),
+        table.border.top.color = "#000000",
+        table.border.bottom.width = gt::px(1.5),
+        table.border.bottom.color = "#000000",
+        column_labels.border.top.width = gt::px(1.2),
+        column_labels.border.top.color = "#000000",
+        column_labels.border.bottom.width = gt::px(1.2),
+        column_labels.border.bottom.color = "#000000",
+        data_row.padding = gt::px(4),
+        table.font.size = 13
+      ) |>
+      gt::cols_align(align = "center", columns = c(N, Media, `Desv. Est.`, Min, Max)) |>
+      gt::cols_align(align = "left", columns = Variable) |>
+      gt::opt_table_font(
+        font = list(
+          gt::google_font("Source Sans Pro"),
+          gt::default_fonts()
+        )
+      ) |>
+      gt::tab_source_note(gt::md("Notas: resumen ilustrativo basado en datos `mtcars`."))
+  } else {
+    knitr::kable(
+      tabla_stats,
+      format = if (knitr::is_latex_output()) "pipe" else "html",
+      align = c("l", "c", "c", "c", "c", "c"),
+      escape = FALSE
+    )
+  }
+}
+```
+
+## Métodos
+
+Breve descripción de los procedimientos aplicados para procesar y analizar la información.
+
+
+

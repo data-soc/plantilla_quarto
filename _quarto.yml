@@ -1,0 +1,123 @@
+# Configuracion principal de la plantilla FACSO.
+# Lee los comentarios para saber donde activar o desactivar opciones rapidas.
+
+project:
+  type: book
+  output-dir: docs        # Cambia si publicas el libro en otra carpeta (ej. dist/)
+  resources:
+    - assets/favicon-2025-20251031.svg  # Asegura que el favicon versionado llegue a docs/
+
+book:
+  title: Reportes FACSO - Plantilla Quarto
+  subtitle: Tesis, informes e investigaciones
+  output-file: reportes-facso-plantilla
+  repo-url: https://github.com/KAravena/reportesfacsobook_template  #URL del repositorio del libro (cambia segun tu repo)
+  author:
+    - name: Nombre Apellido
+      affiliation: Departamento de Sociologia, Universidad de Chile
+      orcid: 0000-0000-0000-0000
+  date: today              # Usa fecha fija (YYYY-MM-DD) si necesitas control editorial
+  date-format: D [de] MMMM [de] YYYY
+  doi: ""
+  sidebar:
+    style: docked
+    search: true
+    collapse-level: 2
+    pinned: true
+    logo: assets/cover.png # Logo que aparece en el panel lateral
+  downloads:
+    - pdf
+  search: true             # Cambia a false si no quieres la caja de busqueda global
+  repo-actions: []         # Agrega ['source', 'issue'] si deseas botones de GitHub
+  page-navigation: true    # Controla flechas siguiente/anterior en la cabecera
+  favicon: assets/favicon-2025-20251031.svg  # Apunta al favicon versionado para romper cache
+  chapters:
+    - index.qmd            # Capitulo inicial o resumen ejecutivo
+    - 00-prefacio.qmd
+    - 01-introduccion.qmd
+    - 02-marco-teorico.qmd
+    - 03-metodologia.qmd
+    - 04-resultados.qmd
+    - 05-discusion.qmd
+    - 06-conclusiones.qmd
+    - references.qmd
+    # Para agregar un nuevo capitulo duplica un archivo .qmd y agregalo aqui:
+    # ej: - 07-analisis-cualitativo.qmd
+  appendices:
+    - apendices/A-encuestas.qmd
+    - apendices/B-tablas.qmd
+    # Guarda anexos extensos en apendices/ y listalos aqui.
+
+csl: refs/apa.csl                # Estilo de citas (cambia a otro .csl si lo prefieres)
+bibliography: refs/referencias.bib
+link-citations: true             # Enlaces desde el texto hacia la bibliografia
+reference-location: section      # Citas agrupadas al final de cada seccion
+
+format:
+  html:
+    theme:
+      light: cosmo               # Cualquier tema Bootswatch (journal, litera, etc.)
+    toc: true                   
+    toc-depth: 3
+    toc-location: right
+    number-sections: true
+    code-copy: true              # Boton copiar codigo
+    code-tools: true             # Menu con toggles para mostrar/ocultar codigo
+    df-print: paged              # Usa "kable" o "default" si prefieres otra salida
+    css: assets/styles.scss      # Punto central para tus estilos personalizados
+    favicon: assets/favicon-2025-20251031.svg  # Cache-bust del favicon anterior
+    anchor-sections: true
+    smooth-scroll: true
+    link-external-newwindow: true
+    include-in-header:
+      - includes/justify.html     # Ajusta justificacion a nivel global
+    include-after-body:
+      - includes/logo-link.html   # Enlaces adicionales (logo clicable y descarga ZIP)
+      - includes/citefix.html     # Corrige estilos de citas
+      - includes/renumber.html    # Reajusta numeracion de figuras/tablas si es necesario
+      - includes/code-toggle.html # Boton global para mostrar/ocultar bloques de codigo
+      - includes/toc-enhance.html # Sincroniza el resaltado del TOC en el margen
+
+  pdf:
+    pdf-engine: xelatex          # Requiere LaTeX con soporte para fuentes OpenType
+    toc: false                   # Generamos TOC/LOF/LOT manualmente en title-pdf.tex
+    lof: false
+    lot: false
+    keep-tex: true
+    documentclass: scrbook       # Usa report/book si prefieres otra estructura
+    classoption:
+      - oneside
+    papersize: a4                # Cambia a letter si trabajas con papel tamano carta
+    geometry:
+      - top=25mm
+      - bottom=25mm
+      - left=30mm
+      - right=20mm
+    colorlinks: true
+    number-sections: true
+    include-in-header: includes/preamble.tex     # Configuracion avanzada PDF
+    include-before-body: includes/title-pdf.tex  # Portada personalizada
+    include-after-body: includes/backmatter.tex  # Material posterior (glosario, licencias, etc.)
+    fig-cap-location: top
+    tbl-cap-location: top
+
+execute:
+  echo: true                    # Cambia a false si quieres ocultar codigo por defecto
+  warning: false
+  message: false
+  freeze: auto                  # Usa true para congelar resultados, false para ejecutar siempre
+  fig-path: "docs/figures/"
+
+lang: es
+
+crossref:
+  appendix-title: Anexo
+  appendix-delim: " - "
+
+metadata-files:
+  - _metadata.yml               # Ajustes adicionales (palabras clave, portada, etc.)
+
+# Estructura complementaria sugerida:
+# input/         -> insumos (data-orig, data-proc, imagenes, bib, prereg)
+# procesamiento/ -> cuadernos de preparacion y analisis
+# output/        -> tablas y graficos listos para el libro

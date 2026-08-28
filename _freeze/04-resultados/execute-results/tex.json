@@ -1,0 +1,21 @@
+{
+  "hash": "86ed5dd210ccb2798a9e4c4134dddcbf",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Resultados\"\n---\n## Analisis descriptivo\n\nResumen de las estadisticas descriptivas clave y visualizaciones de apoyo.\n\n::: {.cell}\n\n```{.r .cell-code}\nif (requireNamespace(\"ggplot2\", quietly = TRUE)) {\n  library(ggplot2)\n  ggplot(mtcars, aes(wt, mpg)) + geom_point()\n}\n```\n\n::: {.cell-output-display}\n![Relacion X^2](04-resultados_files/figure-pdf/grafico-ejemplo-1.pdf){fig-pos='H'}\n:::\n:::\n\n\n## Modelos\n\nPresentacion de los resultados de los modelos propuestos, con interpretacion y conclusiones.\n\n\n::: {.cell tbl-cap='Resumen comparativo de modelos' tbl-label='tbl-modelos'}\n::: {.cell-output-display}\n\n\n|Predictor              | Coef.  | Std. Err. | t-valor | p-valor | Sig. |     IC 95 %      |\n|:----------------------|:------:|:---------:|:-------:|:-------:|:----:|:----------------:|\n|Constante              | 37.227 |   1.599   |  23.28  | <0.001  | ***  | [33.957, 40.497] |\n|Capital social barrial | -3.878 |   0.633   |  -6.13  | <0.001  | ***  | [-5.172, -2.584] |\n|Precariedad laboral    | -0.032 |   0.009   |  -3.52  |  0.001  |  **  | [-0.050, -0.013] |\n|N                      |   32   |           |         |         |      |                  |\n|R^2                    | 0.827  |           |         |         |      |                  |\n|R^2 ajustado           | 0.815  |           |         |         |      |                  |\n\n\n:::\n:::\n\n\n\n",
+    "supporting": [
+      "04-resultados_files\\figure-pdf"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}

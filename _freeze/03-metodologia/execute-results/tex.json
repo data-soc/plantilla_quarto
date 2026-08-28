@@ -1,0 +1,21 @@
+{
+  "hash": "ae24296aacf96d6d53ca8953f0aafb27",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Metodología\"\n---\n\n## Datos\n\nTexto de muestra para describir las fuentes de datos utilizadas.\n\n::: {.cell}\n\n```{.r .cell-code}\n# Carga paquetes de ejemplo\nlibrary(tidyverse)\n```\n:::\n\n\n\n::: {.cell}\n::: {.cell-output .cell-output-stdout}\n\n```\n      mpg             cyl             disp             hp       \n Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  \n 1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  \n Median :19.20   Median :6.000   Median :196.3   Median :123.0  \n Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  \n 3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  \n Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  \n      drat             wt             qsec             vs        \n Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  \n 1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  \n Median :3.695   Median :3.325   Median :17.71   Median :0.0000  \n Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  \n 3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  \n Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  \n       am              gear            carb      \n Min.   :0.0000   Min.   :3.000   Min.   :1.000  \n 1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  \n Median :0.0000   Median :4.000   Median :2.000  \n Mean   :0.4062   Mean   :3.688   Mean   :2.812  \n 3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  \n Max.   :1.0000   Max.   :5.000   Max.   :8.000  \n```\n\n\n:::\n:::\n\n\n\n\n## Variables\n\nDetalle de las variables incluidas en el análisis, así como escalas de medición.\n\n\n\n::: {.cell tbl-cap='Estadísticas descriptivas por variable (ejemplo)' tbl-label='tbl-estadisticas-variables'}\n::: {.cell-output-display}\n\n\n|Variable                     | N  |  Media  | Desv. Est. |  Min   |   Max   |\n|:----------------------------|:--:|:-------:|:----------:|:------:|:-------:|\n|Ingreso per cápita (mensual) | 32 | 20.091  |   6.027    | 10.400 | 33.900  |\n|Capital social barrial       | 32 |  3.217  |   0.978    | 1.513  |  5.424  |\n|Precariedad laboral          | 32 | 146.688 |   68.563   | 52.000 | 335.000 |\n|Capital institucional        | 32 |  3.597  |   0.535    | 2.760  |  4.930  |\n|Participación comunitaria    | 32 | 17.849  |   1.787    | 14.500 | 22.900  |\n\n\n:::\n:::\n\n\n## Métodos\n\nBreve descripción de los procedimientos aplicados para procesar y analizar la información.\n\n\n\n",
+    "supporting": [
+      "03-metodologia_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}

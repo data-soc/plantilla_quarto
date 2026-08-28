@@ -1,0 +1,173 @@
+\AtBeginDocument{\hypersetup{linkcolor=black}}
+% ---------- Paquetes tipograficos y microajustes ----------
+\usepackage{microtype}        % mejor interletrado y justificado
+\usepackage{csquotes}         % comillas tipograficas
+\usepackage{iftex}
+\ifPDFTeX\else
+  % Seleccion de fuentes solo cuando XeTeX/LuaTeX esta disponible.
+  \IfFontExistsTF{TeX Gyre Termes}{
+    \setmainfont{TeX Gyre Termes}
+  }{
+    \IfFontExistsTF{Latin Modern Roman}{\setmainfont{Latin Modern Roman}}{}
+  }
+  \IfFontExistsTF{TeX Gyre Heros}{
+    \setsansfont{TeX Gyre Heros}
+  }{
+    \IfFontExistsTF{Latin Modern Sans}{\setsansfont{Latin Modern Sans}}{}
+  }
+  \IfFontExistsTF{TeX Gyre Cursor}{
+    \setmonofont{TeX Gyre Cursor}
+  }{
+    \IfFontExistsTF{Latin Modern Mono}{\setmonofont{Latin Modern Mono}}{}
+  }
+\fi
+\usepackage{enumitem}         % listas compactas
+\setlist{itemsep=.2em, topsep=.2em}
+
+% ---------- KOMA-Script: estilo de titulos y espaciado ----------
+\KOMAoptions{
+  headings=big,
+  parskip=half,
+  fontsize=12pt,
+  appendixprefix=true
+}
+\setlength{\parindent}{1.5em}
+\setlength{\parskip}{0.6em}
+\usepackage{indentfirst}
+\usepackage{setspace}         % Control del interlineado del documento
+\setstretch{1.5}
+
+% ---------- Encabezados y pies (scrlayer-scrpage) ----------
+\usepackage[automark,headsepline]{scrlayer-scrpage}
+\clearpairofpagestyles
+\automark[chapter]{chapter}
+\ihead{\pagemark}
+\ohead{\itshape\headmark}
+\setheadsepline{0.4pt}
+\renewcommand*{\chaptermarkformat}{}
+\renewcommand*{\chapterpagestyle}{scrheadings}
+\pagestyle{scrheadings}
+\makeatletter
+\let\ps@plain\ps@scrheadings
+\makeatother
+\cfoot{}
+
+% ---------- Hipervinculos mas sobrios ----------
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=[rgb]{0.05,0.2,0.5},
+  urlcolor=[rgb]{0.05,0.2,0.5},
+  pdfauthor={\@author},
+  pdftitle={\@title}
+}
+
+% ---------- Leyendas de figuras/tablas ----------
+\usepackage[labelfont=bf,textfont=it]{caption}
+\captionsetup{
+  skip=8pt
+}
+
+% ---------- Tabla de contenidos ----------
+\KOMAoptions{toc=graduated}
+\RedeclareSectionCommand[tocnumwidth=3em]{chapter}
+\RedeclareSectionCommand[tocindent=3.25em,tocnumwidth=2.8em]{section}
+\RedeclareSectionCommand[tocindent=6.5em,tocnumwidth=2.5em]{subsection}
+\makeatletter
+\newcommand*{\tocdotfill}{\leavevmode\leaders\hbox to .6em{\hss.\hss}\hfill}
+\makeatother
+\RedeclareSectionCommand[toclinefill=\tocdotfill]{chapter}
+\RedeclareSectionCommand[toclinefill=\tocdotfill]{section}
+\RedeclareSectionCommand[toclinefill=\tocdotfill]{subsection}
+\renewcommand*{\contentsname}{Tabla de contenido}
+\setkomafont{chapterentry}{\normalfont}
+\setkomafont{chapterentrypagenumber}{\normalfont}
+
+% ---------- Viudas/Huerfanas y cortes de pagina ----------
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+% ---------- Entorno abstract para scrbook ----------
+\providecommand{\abstractname}{Resumen}
+\makeatletter
+\@ifundefined{abstract}{
+  \newenvironment{abstract}{
+    \cleardoublepage
+    \thispagestyle{plain}
+    \null\vfill
+    \begin{center}
+      {\bfseries\Large \abstractname\par}
+    \end{center}\vspace{1em}
+    \begingroup
+  }{
+    \par\endgroup
+    \vfill\null
+    \cleardoublepage
+  }
+}{}
+\makeatother
+
+% ---------- Soporte de subtitulo desde YAML ----------
+\makeatletter
+\providecommand{\subtitle}[1]{\gdef\@subtitle{#1}}
+\providecommand{\@subtitle}{}
+\makeatother
+
+\makeatletter
+\newcommand{\facso@iflist}[4]{%
+  \begingroup
+    \def\addvspace##1{}%
+    \def\numberline##1{##1}%
+    \def\facso@target{#2}%
+    \newcount\facso@entrycount
+    \facso@entrycount=0\relax
+    \long\def\contentsline##1##2##3{%
+      \def\facso@this{##1}%
+      \ifx\facso@this\facso@target
+        \advance\facso@entrycount\@ne
+      \fi
+    }%
+    \InputIfFileExists{\jobname.#1}{}{}%
+  \endgroup
+  \ifnum\facso@entrycount>0\relax
+    #3%
+  \else
+    #4%
+  \fi}
+\renewcommand{\listoffigures}{%
+  \facso@iflist{lof}{figure}{%
+    \cleardoublepage
+    \phantomsection
+    \addchap*{Listado de Figuras}%
+    \thispagestyle{scrheadings}%
+    \markboth{Listado de Figuras}{Listado de Figuras}%
+    \addcontentsline{toc}{chapter}{Listado de Figuras}%
+    \@starttoc{lof}%
+    \cleardoublepage
+    \automark[chapter]{chapter}%
+  }{}}
+\renewcommand{\listoftables}{%
+  \facso@iflist{lot}{table}{%
+    \cleardoublepage
+    \phantomsection
+    \addchap*{Listado de Tablas}%
+    \thispagestyle{scrheadings}%
+    \markboth{Listado de Tablas}{Listado de Tablas}%
+    \addcontentsline{toc}{chapter}{Listado de Tablas}%
+    \@starttoc{lot}%
+    \cleardoublepage
+    \automark[chapter]{chapter}%
+  }{}}
+\makeatother
+
+% --- Desactivar portada y abstract automaticos de Pandoc (PDF) ---
+\AtBeginDocument{\let\maketitle\relax}
+\renewenvironment{abstract}{}{}
+\providecommand{\appendixname}{}
+\providecommand{\appendixtocname}{}
+\providecommand{\appendixpagename}{}
+\renewcommand*{\appendixname}{Anexo}
+\renewcommand*{\appendixtocname}{Anexos}
+\renewcommand*{\appendixpagename}{Anexos}

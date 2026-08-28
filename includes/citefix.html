@@ -1,0 +1,74 @@
+<script>
+(function () {
+  var isReferences = /(?:^|\/)references\.html(?:#|$)/i.test(window.location.pathname);
+
+  // Base relativa que Quarto publica (para apéndices/…)
+  var offsetMeta = document.querySelector('meta[name="quarto:offset"]');
+  var base = (offsetMeta && offsetMeta.content) ? offsetMeta.content : "";
+
+  // 1) En capítulos: reescribe enlaces de cita -> references.html#ref-*
+  if (!isReferences) {
+    var cites = document.querySelectorAll('a[role="doc-biblioref"][href^="#ref-"]');
+    cites.forEach(function (a) {
+      var hash = a.getAttribute('href'); // "#ref-xxx"
+      // Conserva tooltips. Añade marca para mostrar "volver" luego.
+      a.setAttribute('href', base + 'references.html' + hash);
+      a.setAttribute('data-citefix', 'from-chapter');
+    });
+
+    // Oculta bibliografía local si citeproc la insertó
+    var localRefsBlocks = document.querySelectorAll('section.footnotes, div#refs, div.references, section#references');
+    localRefsBlocks.forEach(function (el) { el.style.display = 'none'; });
+  }
+
+  // 2) En references.html: añade botón "Volver" si se llega desde otra página
+  if (isReferences) {
+    var cameFromOutside = document.referrer && !/\/references\.html(?:#|$)/i.test(new URL(document.referrer).pathname);
+    if (cameFromOutside && window.history && window.history.length > 1) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = '← Volver';
+      btn.setAttribute('aria-label', 'Volver a la página anterior');
+      btn.style.position = 'fixed';
+      btn.style.right = '1rem';
+      btn.style.bottom = '1rem';
+      btn.style.zIndex = '9999';
+      btn.style.padding = '.6rem .9rem';
+      btn.style.borderRadius = '10px';
+      btn.style.border = '1px solid rgba(0,0,0,.15)';
+      btn.style.background = 'var(--bs-body-bg, #fff)';
+      btn.style.color = 'var(--bs-body-color, #111)';
+      btn.style.boxShadow = '0 6px 16px rgba(0,0,0,.12)';
+      btn.onclick = function () { history.back(); };
+      document.body.appendChild(btn);
+    }
+
+    // Si llegamos con hash (#ref-xxx), desplaza con un pequeño retardo
+    // para asegurar que el layout esté listo.
+    if (location.hash && /^#ref-/.test(location.hash)) {
+      setTimeout(function () {
+        try {
+          var target = document.getElementById(location.hash.substring(1));
+          if (target) target.scrollIntoView({behavior: 'smooth', block: 'start'});
+        } catch (e) {}
+      }, 50);
+    }
+  }
+})();
+</script>
+
+<style>
+/* Evita que el ancla de referencias quede “tapada” por el encabezado */
+.csl-entry[id^="ref-"],
+[id^="ref-"] { scroll-margin-top: 90px; }
+
+/* Ajuste suave para tooltips / focos de enlaces */
+a[role="doc-biblioref"]:focus-visible {
+  outline: 2px dashed var(--facso-2, #84A7D8);
+  outline-offset: 2px;
+}
+
+/* Opcional: separadores más legibles en la lista de referencias */
+#refs .csl-entry { padding: .25rem 0; border-bottom: 1px dashed rgba(0,0,0,.06); }
+#refs .csl-entry:last-child { border-bottom: none; }
+</style>

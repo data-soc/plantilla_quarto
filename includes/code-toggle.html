@@ -1,0 +1,176 @@
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const codeSelectors = [
+    '.cell > .code-copy-outer-scaffold',
+    '.cell > .sourceCode',
+    'pre.sourceCode',
+    'div.sourceCode'
+  ];
+
+  const LABEL_SHOW = 'Mostrar el codigo';
+  const LABEL_HIDE = 'Ocultar el codigo';
+  const LABEL_EMPTY = 'Sin fragmentos de codigo';
+  const ICON_SHOW = 'bi bi-code';
+  const ICON_HIDE = 'bi bi-code-slash';
+
+  const toolsContainer = document.querySelector('.sidebar-tools-main');
+  let buttonHost = toolsContainer;
+  let floatingContainer = null;
+
+  if (!buttonHost) {
+    floatingContainer = document.createElement('div');
+    floatingContainer.className = 'global-code-toggle-container';
+    document.body.appendChild(floatingContainer);
+    buttonHost = floatingContainer;
+  }
+
+  const repoLink = toolsContainer ? toolsContainer.querySelector('a[href*="github.com"]') : null;
+  if (repoLink) {
+    repoLink.title = 'Repositorio';
+    repoLink.setAttribute('aria-label', 'Repositorio');
+  }
+
+  const button = document.createElement('a');
+  button.href = '#';
+  button.className = 'quarto-navigation-tool px-1 global-code-toggle';
+  button.setAttribute('role', 'button');
+
+  if (!toolsContainer) {
+    button.classList.add('global-code-toggle-floating');
+  }
+
+  const icon = document.createElement('i');
+  icon.className = ICON_HIDE;
+  button.appendChild(icon);
+
+  const pdfLink = toolsContainer ? toolsContainer.querySelector('a[href$=".pdf"]') : null;
+  if (pdfLink && buttonHost === toolsContainer) {
+    buttonHost.insertBefore(button, pdfLink);
+  } else {
+    buttonHost.appendChild(button);
+  }
+
+  const pageHasCode = codeSelectors.some(function (selector) {
+    return document.querySelector(selector);
+  });
+
+  let showingCode = true;
+
+  const setIcon = function (iconClass) {
+    icon.className = iconClass;
+  };
+
+  const disableButton = function () {
+    button.classList.add('global-code-toggle-disabled');
+    button.classList.add('disabled');
+    button.setAttribute('aria-disabled', 'true');
+    button.setAttribute('aria-pressed', 'false');
+    button.setAttribute('aria-label', LABEL_EMPTY);
+    button.title = LABEL_EMPTY;
+    button.tabIndex = -1;
+    setIcon(ICON_SHOW);
+  };
+
+  const enableButton = function () {
+    button.classList.remove('global-code-toggle-disabled');
+    button.classList.remove('disabled');
+    button.removeAttribute('aria-disabled');
+    button.tabIndex = 0;
+  };
+
+  const update = function () {
+    if (!pageHasCode) {
+      disableButton();
+      document.body.classList.remove('global-code-hidden');
+      return;
+    }
+
+    enableButton();
+
+    if (showingCode) {
+      document.body.classList.remove('global-code-hidden');
+      button.setAttribute('aria-pressed', 'false');
+      button.setAttribute('aria-label', LABEL_HIDE);
+      button.title = LABEL_HIDE;
+      setIcon(ICON_HIDE);
+    } else {
+      document.body.classList.add('global-code-hidden');
+      button.setAttribute('aria-pressed', 'true');
+      button.setAttribute('aria-label', LABEL_SHOW);
+      button.title = LABEL_SHOW;
+      setIcon(ICON_SHOW);
+    }
+  };
+
+  button.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    if (!pageHasCode) {
+      return;
+    }
+
+    showingCode = !showingCode;
+    update();
+  });
+
+  button.addEventListener('keydown', function (event) {
+    if (event.key === ' ' || event.key === 'Spacebar') {
+      event.preventDefault();
+      button.click();
+    }
+  });
+
+  update();
+});
+</script>
+<style>
+body.global-code-hidden .cell > .code-copy-outer-scaffold,
+body.global-code-hidden .cell > .sourceCode,
+body.global-code-hidden pre.sourceCode,
+body.global-code-hidden div.sourceCode {
+  display: none;
+}
+
+.global-code-toggle {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.global-code-toggle i {
+  font-size: 1.05rem;
+}
+
+.global-code-toggle-disabled {
+  opacity: 0.6;
+  cursor: default;
+  pointer-events: none;
+}
+
+.global-code-toggle-container {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 1030;
+}
+
+.global-code-toggle-floating {
+  background-color: var(--bs-body-bg, #ffffff);
+  border-radius: 0.375rem;
+  padding: 0.4rem 0.55rem;
+  box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.2);
+}
+
+.global-code-toggle-floating i {
+  font-size: 1.15rem;
+}
+
+@media (max-width: 768px) {
+  .global-code-toggle-container {
+    right: 1rem;
+    bottom: 1rem;
+  }
+}
+</style>
