@@ -4,7 +4,7 @@ Esta plantilla de Quarto permite generar reportes reproducibles combinando texto
 
 El propósito del repositorio es proporcionar un punto de partida completo: estructura de capítulos, manejo de datos, estilos visuales coherentes y archivos auxiliares para la exportación a HTML y PDF. El repositorio se organiza siguiendo las prácticas reproducibles del  [protocolo IPO](https://lisacoes.com/protocolos/a-ipo-rep/), con carpetas diferenciadas para `input/`, `procesamiento/` y `output/`.
 
-Puede revisar la versión publicada en [https://datasoc.github.io/ReportesFACSO_plantillaQuarto/](https://github.com/data-soc/ReportesFACSO_plantillaQuarto), donde también encontrará la opción para descargar el paquete ZIP listo para usar. 
+Puede revisar la versión publicada en [[https://datasoc.github.io/plantilla_quarto/](https://data-soc.github.io/plantilla_quarto/)], donde también encontrará la opción de descargar el paquete ZIP listo para usar. 
 
 Esta versión es una adaptación de la plantilla para reportes FACSO desarrollada por [Katherine Aravena](https://github.com/karavena), y es similar a la propuesta de [**tesisfacsodown**](https://jc-castillo.com/blog/posts/tesisfacsodown/index.html) que se basa en Rmarkdown/Bookdown, pero aprovecha las ventajas de Quarto para generar documentos HTML y PDF desde un mismo proyecto, con mayor flexibilidad en estilos y formatos. 
 
